@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  redis:
+    image: redis
+    container_name: redis_apis
+    ports:
+      - "6377:6379"
+  neo4j:
+    container_name: Neo4j-test
+    image: neo4j:4.0
+    volumes:
+      - ./data:/data
+      - ./plugins:/plugins
+      - ./import:/import
+    ports:
+      - "7475:7474"
+      - "7688:7687"
+  couchbase1:
+    image: couchbase/server
+    volumes:
+      - ~/couchbase/node1:/opt/couchbase/var
+    ports:
+      - "8090:8091"
+      - "8094:8092"
+      - "8097:8093"
+      - "11214:11210"
+  mongodb:
+    image: mongo:6-jammy
+    ports:
+      - '27018:27017'
+    volumes:
+      - dbdata6:/data/db
+volumes:
+  dbdata6:
